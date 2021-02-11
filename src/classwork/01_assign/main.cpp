@@ -2,8 +2,8 @@
 
 //Write include for capturing input from keyboard and displaying output to screen
 
+#include "types.h"
 #include <iostream>
-#include "types.cpp"
 
 int main()
 {
