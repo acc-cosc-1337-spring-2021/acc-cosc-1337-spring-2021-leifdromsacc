@@ -24,7 +24,7 @@ int main()
 	//It is necessary to cast the meal amount to a string in order to include it in the same cout statement
 	// as the line item name so they appear on the same line of the printed receipt
 	std::cout << "Meal Amount: 	" + std::to_string(meal_amount) + "\n";
-	std::cout << "Sales Tax: 	" + std::to_string(tax_amount * 10) + "%" + "\n";
+	std::cout << "Sales Tax: 	" + std::to_string(tax_amount) +  "\n";
 	std::cout << "Tip Amount: 	" + std::to_string(tip_amount) + "\n";
 	std::cout << "Total: 	" + std::to_string(total) +  "\n";
 
