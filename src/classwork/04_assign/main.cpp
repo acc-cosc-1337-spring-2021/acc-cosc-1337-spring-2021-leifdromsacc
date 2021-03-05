@@ -19,8 +19,23 @@ int main()
 	{
 		std::cout << "Enter a number between 1 and 10 to calculate the factorial. Enter 0 to quit.\n";
 		std::cin >> input;
-		std::cout << factorial(input);
-		std::cout << "\n";
+		if (input > 0 && input < 11)
+		{	
+			std:: cout << "The factorial of ";
+			std:: cout << input;
+			std:: cout << " is: \n";
+			std::cout << factorial(input);
+			std::cout << "\n";
+		}
+		else
+		{
+			// Gently scold the user for entering a number greater
+			// than 10 or less than 1 (but not 0)
+			std::cout << "Please enter a number that is between 1 and 10. You entered: ";
+			std::cout << input;
+			std::cout << "\n";
+		}
+
 	} while (
 		input != 0);
 
