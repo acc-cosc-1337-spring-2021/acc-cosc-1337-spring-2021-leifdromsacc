@@ -36,13 +36,15 @@ int main()
 	{
 		if (game.game_over() == true)
 		{
-			cout << "Game over! Here is the final board: \n";
+			cout << "Game over! ";
+			cout << game.get_winner();
+			cout << " is the winner! Here is the final board: \n";
 			game.display_board();
 
 			invalidInput = true;
 			while (invalidInput == true)
 			{
-				cout << "Who is the first player? Enter 'X' or 'O'\n";
+				cout << "Who is the first player? Enter 'X' or 'O', or enter 'Q' to quit\n";
 				cin >> input;
 				cout << "\n";
 
