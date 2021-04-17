@@ -1,5 +1,5 @@
-#include "tic_tac_toe.h";
-#include <iostream>;
+#include "tic_tac_toe.h"
+#include <iostream>
 
 using namespace std;
 
@@ -140,23 +140,81 @@ const string TicTacToe::get_winner()
     return winner;
 }
 
-const void TicTacToe::display_board()
+ostream &operator<<(ostream &out, const TicTacToe &game)
 {
-    for (int i = 0; i < (int)pegs.size(); i++)
     {
-        if (pegs[i] == "")
+        for (int i = 0; i < (int)game.pegs.size(); i++)
         {
-            cout << " ";
-        }
-        else
-        {
-            cout << pegs[i];
+            if (game.pegs[i] == "")
+            {
+                out << " ";
+            }
+            else
+            {
+                out << game.pegs[i];
+            }
+
+            //print newline if it's the third, sixth, or 9th element
+            if ((i + 1) % 3 == 0)
+            {
+                out << "\n";
+            }
         }
 
-        //print newline if it's the third, sixth, or 9th element
-        if ((i + 1) % 3 == 0)
-        {
-            cout << "\n";
-        }
+        return out;
+    }
+}
+
+istream &operator>>(istream &in, TicTacToe &game)
+
+{
+    string input;
+
+    cout << "What position do you want to mark? Player is: ";
+    cout << game.get_player();
+    cout << "\n";
+    cin >> input;
+    game.mark_board(stoi(input));
+    cout << "Here is the board: \n";
+    return in;
+}
+
+void TicTacToeManager::save_game(TicTacToe b)
+{
+    games.push_back(b);
+    update_winner_count(b.get_winner());
+}
+ostream &operator<<(std::ostream &out, const TicTacToeManager &manager)
+{
+
+    for (int i = 0; i < manager.games.size(); i++)
+    {
+        cout << manager.games[i];
+        cout << "\n";
+    }
+    return out;
+}
+
+void TicTacToeManager::get_winner_total(int &o, int &w, int &t)
+{
+
+    o = x_win;
+    w = o_win;
+    t = ties;
+}
+
+void TicTacToeManager::update_winner_count(string winner)
+{
+    if (winner == "X")
+    {
+        x_win++;
+    }
+    if (winner == "O")
+    {
+        o_win++;
+    }
+    if (winner == "C")
+    {
+        ties++;
     }
 }

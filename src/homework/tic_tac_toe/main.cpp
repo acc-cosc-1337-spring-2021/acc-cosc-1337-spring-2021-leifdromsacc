@@ -1,25 +1,19 @@
 #include "tic_tac_toe.h"
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
 	string input;
 	TicTacToe game;
+	TicTacToeManager manager;
 	bool invalidInput = true;
 
 	while (invalidInput == true)
 	{
-		cout << "Welcome to the game! Enter 'Q' at any time to quit\n";
+		cout << "Welcome to the game!\n";
 		cout << "Who is the first player? Enter 'X' or 'O'\n";
 		cin >> input;
 		cout << "\n";
-
-		if (input == "Q" || input == "q")
-		{
-			return 0;
-		}
 
 		if (input == "X" || input == "O")
 		{
@@ -39,17 +33,34 @@ int main()
 			cout << "Game over! ";
 			cout << game.get_winner();
 			cout << " is the winner! Here is the final board: \n";
-			game.display_board();
+			cout << game;
+			cout << "\n";
+			manager.save_game(game);
+			int x = 0;
+			int o = 0;
+			int t = 0;
+			manager.get_winner_total(x, o, t);
+
+			cout << "Here are the totals: \n";
+			cout << "X wins ";
+			cout << x;
+			cout << ", O wins ";
+			cout << o;
+			cout << ", Ties ";
+			cout << t;
+			cout << "\n";
 
 			invalidInput = true;
 			while (invalidInput == true)
 			{
-				cout << "Who is the first player? Enter 'X' or 'O', or enter 'Q' to quit\n";
+				cout << "Who is the first player? Enter 'X' or 'O', or enter 'Q'\n";
 				cin >> input;
 				cout << "\n";
 
 				if (input == "Q" || input == "q")
 				{
+					cout << "Thank you for playing. Here are all the games played: \n";
+					cout << manager;
 					return 0;
 				}
 
@@ -64,25 +75,9 @@ int main()
 				}
 			}
 		}
-
-		cout << "What position do you want to mark? Player is: ";
-		cout << game.get_player();
-		cout << "\n";
-		cin >> input;
-		if (input == "Q" || input == "q")
-		{
-			return 0;
-		}
-		else
-		{
-			game.mark_board(stoi(input));
-		}
-		cout << "Here is the board: \n";
-		game.display_board();
+		cin >> game;
+		cout << game;
 	}
 
 	return 0;
-	// 	1) Prompt the user for first player
-	// 2) Start the game
-	// 3) In a user-controlled loop prompt the user for a position (int type) and call the mark_board tic tac toe class member function.
 }
