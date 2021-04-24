@@ -1,12 +1,16 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
+#include "tic_tac_toe_manager.h"
 #include <iostream>
 
 int main()
 {
 	string input;
-	TicTacToe game;
-	TicTacToeManager manager;
+	unique_ptr<TicTacToe> game;
+	unique_ptr<TicTacToeManager> manager = make_unique<TicTacToeManager>();
 	bool invalidInput = true;
+	int game_size;
 
 	while (invalidInput == true)
 	{
@@ -14,11 +18,25 @@ int main()
 		cout << "Who is the first player? Enter 'X' or 'O'\n";
 		cin >> input;
 		cout << "\n";
+		cout << "Do you want to play a 3x3 game or a 4x4 game? Enter '3' for a 3x3 game or '4' for a 4x4 game\n";
+		cin >> game_size;
+		cout << "\n";
 
-		if (input == "X" || input == "O")
+		if ((input == "X" || input == "O") && (game_size == 3 || game_size == 4))
 		{
-			game.start_game(input);
-			invalidInput = false;
+			if (game_size == 3)
+			{
+				game = make_unique<TicTacToe3>();
+				game->start_game(input);
+				invalidInput = false;
+			}
+
+			if (game_size == 4)
+			{
+				game = make_unique<TicTacToe4>();
+				game->start_game(input);
+				invalidInput = false;
+			}
 		}
 		else
 		{
@@ -28,18 +46,18 @@ int main()
 
 	while (input != "Q" || input != "q")
 	{
-		if (game.game_over() == true)
+		if (game->game_over() == true)
 		{
 			cout << "Game over! ";
-			cout << game.get_winner();
+			cout << game->get_winner();
 			cout << " is the winner! Here is the final board: \n";
-			cout << game;
+			cout << *game;
 			cout << "\n";
-			manager.save_game(game);
+			manager->save_game(game);
 			int x = 0;
 			int o = 0;
 			int t = 0;
-			manager.get_winner_total(x, o, t);
+			manager->get_winner_total(x, o, t);
 
 			cout << "Here are the totals: \n";
 			cout << "X wins ";
@@ -60,13 +78,23 @@ int main()
 				if (input == "Q" || input == "q")
 				{
 					cout << "Thank you for playing. Here are all the games played: \n";
-					cout << manager;
+					cout << *manager;
 					return 0;
 				}
 
-				if (input == "X" || input == "O")
+				if ((input == "X" || input == "O") && (game_size == 3 || game_size == 4))
 				{
-					game.start_game(input);
+					if (game_size == 3)
+					{
+						game = make_unique<TicTacToe3>();
+						game->start_game(input);
+					}
+					else
+					{
+						game = make_unique<TicTacToe4>();
+						game->start_game(input);
+					}
+
 					invalidInput = false;
 				}
 				else
@@ -75,8 +103,8 @@ int main()
 				}
 			}
 		}
-		cin >> game;
-		cout << game;
+		cin >> *game;
+		cout << *game;
 	}
 
 	return 0;
