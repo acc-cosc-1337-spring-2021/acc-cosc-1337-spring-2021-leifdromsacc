@@ -5,6 +5,7 @@
 #include "tic_tac_toe_4.h"
 
 #include "tic_tac_toe_manager.h"
+#include <memory>
 
 TEST_CASE("Verify First Player is X")
 {

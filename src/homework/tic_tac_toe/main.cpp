@@ -3,6 +3,7 @@
 #include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
 #include <iostream>
+#include <memory>
 
 int main()
 {

@@ -1,6 +1,8 @@
 #include <vector>
 #include <string>
+#include <memory>
 #include "tic_tac_toe.h"
+
 
 using namespace std;
 

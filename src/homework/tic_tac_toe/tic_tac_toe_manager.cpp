@@ -1,5 +1,6 @@
 #include "tic_tac_toe_manager.h"
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
