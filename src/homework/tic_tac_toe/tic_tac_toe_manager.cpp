@@ -1,11 +1,22 @@
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_data.h"
 #include <iostream>
 #include <memory>
 
 using namespace std;
 
-void TicTacToeManager::save_game(unique_ptr<TicTacToe>& b)
-{   
+TicTacToeManager::TicTacToeManager(TicTacToeData d) 
+: data{d}
+{
+    games = data.get_games();
+
+    for (auto &game : games)
+    {
+        update_winner_count(game->get_winner());
+    }
+}
+void TicTacToeManager::save_game(unique_ptr<TicTacToe> &b)
+{
     update_winner_count(b->get_winner());
     games.push_back(std::move(b));
 }
@@ -42,4 +53,10 @@ void TicTacToeManager::update_winner_count(string winner)
     {
         ties++;
     }
+}
+
+TicTacToeManager::~TicTacToeManager()
+{
+    cout << "\n save games\n";
+    data.save_games(games);
 }

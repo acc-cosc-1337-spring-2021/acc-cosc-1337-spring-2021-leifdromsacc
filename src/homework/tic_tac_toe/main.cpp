@@ -2,6 +2,7 @@
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_data.h"
 #include <iostream>
 #include <memory>
 
@@ -9,7 +10,8 @@ int main()
 {
 	string input;
 	unique_ptr<TicTacToe> game;
-	unique_ptr<TicTacToeManager> manager = make_unique<TicTacToeManager>();
+	unique_ptr<TicTacToeData> data = make_unique<TicTacToeData>();
+	unique_ptr<TicTacToeManager> manager = make_unique<TicTacToeManager>(data);
 	bool invalidInput = true;
 	int game_size;
 
