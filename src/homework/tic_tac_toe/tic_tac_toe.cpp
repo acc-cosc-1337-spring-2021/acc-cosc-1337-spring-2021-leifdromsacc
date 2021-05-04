@@ -129,14 +129,43 @@ ostream &operator<<(ostream &out, const TicTacToe &game)
         }
 
         for (int i = 0; i < (int)game.pegs.size(); i++)
-        {   
+        {
             out << game.pegs[i];
+            if (game.pegs.size() == 9 && (i != 2 && i != 5 && i != 8))
+            {
+                out << "|";
+            }
+
+            if (game.pegs.size() == 16 && (i != 3 && i != 7 && i != 11 && i != 15))
+            {
+                out << "|";
+            }
             //print newline if it's the third, sixth, or 9th element for 3x3 board or fourth, eighth, or 12th for 4x4 board
             if ((i + 1) % newlineSize == 0)
             {
-                out << "\n";
+                if (game.pegs.size() == 9 && (i + 1) != 9)
+                {
+                    out << "\n";
+                    for (int j = 0; j < newlineSize + 2; j++)
+                    {
+                        out << "-";
+                    }
+                    out << "\n";
+                }
+
+                if (game.pegs.size() == 16 && (i + 1) != 16)
+                {
+                    out << "\n";
+                    for (int j = 0; j < newlineSize + 2; j++)
+                    {
+                        out << "-";
+                    }
+                    out << "\n";
+                }
             }
         }
+
+        out << "\n\n";
 
         return out;
     }
