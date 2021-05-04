@@ -10,8 +10,11 @@ int main()
 {
 	string input;
 	unique_ptr<TicTacToe> game;
-	unique_ptr<TicTacToeData> data = make_unique<TicTacToeData>();
-	unique_ptr<TicTacToeManager> manager = make_unique<TicTacToeManager>(data);
+	// unique_ptr<TicTacToeData> data = make_unique<TicTacToeData>();
+	// unique_ptr<TicTacToeManager> manager = make_unique<TicTacToeManager>(data);
+	TicTacToeData data;
+	TicTacToeManager manager(data);
+
 	bool invalidInput = true;
 	int game_size;
 
@@ -56,11 +59,11 @@ int main()
 			cout << " is the winner! Here is the final board: \n";
 			cout << *game;
 			cout << "\n";
-			manager->save_game(game);
+			manager.save_game(game);
 			int x = 0;
 			int o = 0;
 			int t = 0;
-			manager->get_winner_total(x, o, t);
+			manager.get_winner_total(x, o, t);
 
 			cout << "Here are the totals: \n";
 			cout << "X wins ";
@@ -81,7 +84,7 @@ int main()
 				if (input == "Q" || input == "q")
 				{
 					cout << "Thank you for playing. Here are all the games played: \n";
-					cout << *manager;
+					cout << manager;
 					return 0;
 				}
 

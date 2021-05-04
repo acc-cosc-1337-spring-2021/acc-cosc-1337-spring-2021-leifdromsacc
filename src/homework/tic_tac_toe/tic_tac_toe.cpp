@@ -48,7 +48,7 @@ bool TicTacToe::check_board_full()
 {
     for (int i = 0; i < (int)pegs.size(); i++)
     {
-        if (pegs[i] == "")
+        if (pegs[i] == " ")
         {
             return false;
         }
@@ -62,7 +62,7 @@ void TicTacToe::clear_board()
 
     for (int i = 0; i < (int)pegs.size(); i++)
     {
-        pegs[i] = "";
+        pegs[i] = " ";
     }
 }
 
@@ -129,16 +129,8 @@ ostream &operator<<(ostream &out, const TicTacToe &game)
         }
 
         for (int i = 0; i < (int)game.pegs.size(); i++)
-        {
-            if (game.pegs[i] == "")
-            {
-                out << " ";
-            }
-            else
-            {
-                out << game.pegs[i];
-            }
-
+        {   
+            out << game.pegs[i];
             //print newline if it's the third, sixth, or 9th element for 3x3 board or fourth, eighth, or 12th for 4x4 board
             if ((i + 1) % newlineSize == 0)
             {

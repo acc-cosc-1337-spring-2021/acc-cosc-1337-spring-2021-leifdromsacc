@@ -25,7 +25,7 @@ protected:
     virtual bool check_diagonal_win();
     	
 public:
-    TicTacToe(int size):pegs(size * size, ""){};
+    TicTacToe(int size):pegs(size * size, " "){};
     TicTacToe(vector<string> p, string win): pegs(p), winner(win){}
     bool game_over();
     void start_game(string first_player);
